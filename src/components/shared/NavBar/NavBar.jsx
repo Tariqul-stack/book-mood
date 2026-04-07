@@ -31,7 +31,9 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-[#F3F3F3]">
+    <div className="bg-[#F9F9F9] relative shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
+      {" "}
+      <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#23BE0A]/30 to-transparent"></div>
       <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-4">
         {/* Left */}
         <div className="navbar-start">
@@ -49,8 +51,20 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-[#131313] cursor-pointer">
-            Book Vibe
+          <h1
+            className="text-2xl sm:text-3xl font-extrabold 
+                bg-linear-to-r from-[#23BE0A] to-[#59C6D2] 
+                bg-clip-text text-transparent 
+                drop-shadow-[0_4px_12px_rgba(35,190,10,0.35)] 
+                relative"
+          >
+            Book Mood
+            {/* Glow layer */}
+            <span
+              className="absolute inset-0 
+                bg-linear-to-r from-[#23BE0A] to-[#59C6D2] 
+                blur-md opacity-20 -z-10"
+            ></span>
           </h1>
         </div>
 
