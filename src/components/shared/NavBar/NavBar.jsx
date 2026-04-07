@@ -2,8 +2,28 @@ import React from "react";
 
 const Navbar = () => {
   return (
-    <div>
-      <h3>NavBar</h3>
+    <div className="navbar bg-base-100 shadow-sm">
+      <div className="navbar-start">
+        <a className="btn btn-ghost text-xl">Book Mood</a>
+      </div>
+
+      <div className="navbar-center hidden lg:flex">
+        <ul className="menu menu-horizontal px-1">
+          <li>
+            <a>Home</a>
+          </li>
+          <li>
+            <a>Books</a>
+          </li>
+          <li>
+            <a>About</a>
+          </li>
+        </ul>
+      </div>
+
+      <div className="navbar-end">
+        <a className="btn">Login</a>
+      </div>
     </div>
   );
 };

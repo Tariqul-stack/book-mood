@@ -36,8 +36,14 @@ It focuses on improving skills like component structuring, state management, and
 ```bash
 src/
  ├── components/
+ │    └── shared/NavBar/NavBar.jsx
+ ├── layout/
+ │    └── MainLayout.jsx
  ├── pages/
- ├── App.jsx
+ │    ├── Homepage/Homepage.jsx
+ │    └── Books/Books.jsx
+ ├── routes/
+ │    └── Routes.jsx
  └── main.jsx
 ```
 
