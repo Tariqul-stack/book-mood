@@ -7,7 +7,7 @@ const BookDetails = () => {
   const { bookId } = useParams();
   const books = useLoaderData();
 
-  const { storedBooks, setStoredBooks } = useContext(BookContext);
+  const { readList, setReadList } = useContext(BookContext);
   const { wishList, setWishList } = useContext(BookContext);
 
   const book = books.find((book) => book.bookId === Number(bookId));
@@ -22,23 +22,23 @@ const BookDetails = () => {
 
   // Handle Mark as Read
   const handleMarkAsRead = (currentBook) => {
-    const isExistBook = storedBooks.find(
+    const isExistBook = readList.find(
       (item) => item.bookId === currentBook.bookId,
     );
 
     if (isExistBook) {
       toast.error("The book already exists");
     } else {
-      setStoredBooks([...storedBooks, currentBook]);
+      setReadList([...readList, currentBook]);
       toast.success(`${currentBook.bookName} is added to read list`);
     }
 
-    console.log(currentBook, storedBooks, "Book");
+    console.log(currentBook, readList, "Book");
   };
 
   // Handle Wish List
   const handleWishList = (currentBook) => {
-    const isExistInReadList = storedBooks.find(
+    const isExistInReadList = readList.find(
       (book) => book.bookId === currentBook.bookId,
     );
     if (isExistInReadList) {
@@ -57,7 +57,7 @@ const BookDetails = () => {
       toast.success(`${currentBook.bookName} is added to wish list`);
     }
 
-    console.log(currentBook, storedBooks, "Book");
+    console.log(currentBook, readList, "Book");
   };
 
   return (

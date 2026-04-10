@@ -3,12 +3,12 @@ import React, { createContext, useState } from "react";
 export const BookContext = createContext();
 
 const BookProvider = ({ children }) => {
-  const [storedBooks, setStoredBooks] = useState([]);
+  const [readList, setReadList] = useState([]);
   const [wishList, setWishList] = useState([]);
 
   const bookInfo = {
-    storedBooks,
-    setStoredBooks,
+    readList,
+    setReadList,
     wishList,
     setWishList,
   };
