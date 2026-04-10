@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
+import { BookContext } from "../../Context/BookContext";
+import { toast } from "react-toastify";
 
 const BookDetails = () => {
   const { bookId } = useParams();
   const books = useLoaderData();
+
+  const { storedBooks, setStoredBooks } = useContext(BookContext);
+  const { wishList, setWishList } = useContext(BookContext);
 
   const book = books.find((book) => book.bookId === Number(bookId));
 
@@ -15,11 +20,51 @@ const BookDetails = () => {
     );
   }
 
+  // Handle Mark as Read
+  const handleMarkAsRead = (currentBook) => {
+    const isExistBook = storedBooks.find(
+      (item) => item.bookId === currentBook.bookId,
+    );
+
+    if (isExistBook) {
+      toast.error("The book already exists");
+    } else {
+      setStoredBooks([...storedBooks, currentBook]);
+      toast.success(`${currentBook.bookName} is added to read list`);
+    }
+
+    console.log(currentBook, storedBooks, "Book");
+  };
+
+  // Handle Wish List
+  const handleWishList = (currentBook) => {
+    const isExistInReadList = storedBooks.find(
+      (book) => book.bookId === currentBook.bookId,
+    );
+    if (isExistInReadList) {
+      toast.error("This book is already in read list");
+      return;
+    }
+
+    const isExistBook = wishList.find(
+      (item) => item.bookId === currentBook.bookId,
+    );
+
+    if (isExistBook) {
+      toast.error("The book already exists");
+    } else {
+      setWishList([...wishList, currentBook]);
+      toast.success(`${currentBook.bookName} is added to wish list`);
+    }
+
+    console.log(currentBook, storedBooks, "Book");
+  };
+
   return (
     <div className="container mx-auto px-4 py-10 lg:py-14">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
         {/* Left Side */}
-        <div className="bg-[#F3F3F3] rounded-3xl p-8 md:p-12 flex items-center justify-center min-h-125 shadow-[0_10px_40px_rgba(0,0,0,0.06)]">
+        <div className="bg-[#F3F3F3] rounded-3xl p-8 md:p-12 flex items-center justify-center min-h-[520px] shadow-[0_10px_40px_rgba(0,0,0,0.06)]">
           <img
             src={book.image}
             alt={book.bookName}
@@ -39,7 +84,7 @@ const BookDetails = () => {
           </div>
 
           <div className="border-b border-gray-200 pb-5">
-            <p className="text-2xl text-[#131313CC] font-medium">
+            <p className="text-xl text-[#131313CC] font-medium">
               {book.category}
             </p>
           </div>
@@ -82,12 +127,18 @@ const BookDetails = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 pt-4">
-            <button className="btn h-14 px-8 rounded-xl border border-[#1313134D] bg-white text-[#131313] text-xl font-semibold hover:bg-gray-100 shadow-none">
-              Read
+            <button
+              onClick={() => handleMarkAsRead(book)}
+              className="btn h-14 px-8 rounded-xl border border-[#1313134D] bg-white text-[#131313] text-xl font-semibold hover:bg-gray-100 shadow-none"
+            >
+              Mark as Read
             </button>
 
-            <button className="btn h-14 px-8 rounded-xl border-none bg-[#59C6D2] text-white text-xl font-semibold hover:bg-[#46b7c4] shadow-[0_10px_25px_rgba(89,198,210,0.25)]">
-              Wishlist
+            <button
+              onClick={() => handleWishList(book)}
+              className="btn h-14 px-8 rounded-xl border-none bg-[#59C6D2] text-white text-xl font-semibold hover:bg-[#46b7c4] shadow-[0_10px_25px_rgba(89,198,210,0.25)]"
+            >
+              Add to Wishlist
             </button>
           </div>
         </div>

@@ -32,7 +32,7 @@ const Navbar = () => {
 
   return (
     <div className="bg-[#F9F9F9] relative shadow-[0_4px_20px_rgba(0,0,0,0.06)]">
-      <div className="absolute bottom-0 left-0 w-full h-px bg-linear-to-r from-transparent via-[#23BE0A]/30 to-transparent"></div>
+      <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-[#23BE0A]/30 to-transparent"></div>
 
       <div className="container mx-auto px-4 md:px-6 lg:px-8 xl:px-0">
         <div className="navbar py-4">
